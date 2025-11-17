@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Business Hub — Insights & Work</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">Business Hub</div>
+      <div class="tag">Ideas • Strategy • Work</div>
+    </div>
+
+    <div class="top-actions">
+      <button id="themeToggle" title="Toggle theme">🌙</button>
+      <button id="openLogin">Admin</button>
+      <a id="deployBtn" class="ghost" href="#deploy">Deploy</a>
+    </div>
+  </header>
+
+  <nav class="main-nav" id="mainNav">
+    <a href="#home" class="navlink">Home</a>
+    <a href="#thoughts" class="navlink">Thoughts</a>
+    <a href="#work" class="navlink">Work</a>
+    <a href="#projects" class="navlink">Portfolio</a>
+    <a href="#contact" class="navlink">Contact</a>
+    <a href="#admin" class="navlink" id="navAdminLink">Admin</a>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-inner">
+        <h1>Your Business Ideas. Elevated.</h1>
+        <p>Share insights, manage projects, and showcase your work — fast and professional.</p>
+        <div class="hero-cta">
+          <a href="#thoughts" class="btn primary">Read Thoughts</a>
+          <a href="#projects" class="btn outline">View Projects</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="card stats-card">
+          <h3>Quick Stats</h3>
+          <div class="stats-grid">
+            <div><span id="statThoughts">0</span><small>Thoughts</small></div>
+            <div><span id="statProjects">0</span><small>Projects</small></div>
+            <div><span id="statContacts">0</span><small>Messages</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THOUGHTS / BLOG -->
+    <section id="thoughts" class="section container">
+      <div class="section-head">
+        <h2>Business Thoughts</h2>
+        <div class="filter-row">
+          <select id="categoryFilter">
+            <option value="all">All categories</option>
+          </select>
+          <input id="searchThoughts" placeholder="Search thoughts..." />
+          <button class="btn small" id="newThoughtBtn">New Thought</button>
+          <button class="btn small ghost" id="exportBtn">Export</button>
+          <input type="file" id="importFile" accept=".json" style="display:none" />
+          <button class="btn small ghost" id="importBtn">Import</button>
+        </div>
+      </div>
+
+      <div id="thoughtGrid" class="grid cards"></div>
+
+      <div id="thoughtEditor" class="editor modal hidden">
+        <div class="modal-inner">
+          <h3 id="thoughtEditorTitle">New Thought</h3>
+          <input id="thoughtTitle" placeholder="Title" />
+          <input id="thoughtCategory" placeholder="Category (e.g. Strategy)" />
+          <textarea id="thoughtContent" rows="8" placeholder="Write your thought..."></textarea>
+          <label class="file">
+            <input id="thoughtImage" type="file" accept="image/*" />
+            <span>Upload image (optional)</span>
+          </label>
+          <div class="editor-actions">
+            <button id="saveThought" class="btn primary">Save</button>
+            <button id="cancelThought" class="btn ghost">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK / POSTS -->
+    <section id="work" class="section container">
+      <div class="section-head">
+        <h2>Work & Updates</h2>
+        <div>
+          <button id="newWorkBtn" class="btn small">New Update</button>
+        </div>
+      </div>
+
+      <div id="workList" class="list cards"></div>
+
+      <div id="workEditor" class="editor modal hidden">
+        <div class="modal-inner">
+          <h3 id="workEditorTitle">New Work</h3>
+          <input id="workTitle" placeholder="Title" />
+          <input id="workTags" placeholder="Tags (comma separated)" />
+          <textarea id="workContent" rows="6" placeholder="Describe the work/project..."></textarea>
+          <label class="file">
+            <input id="workImage" type="file" accept="image/*" />
+            <span>Upload image (optional)</span>
+          </label>
+          <div class="editor-actions">
+            <button id="saveWork" class="btn primary">Save</button>
+            <button id="cancelWork" class="btn ghost">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS / PORTFOLIO -->
+    <section id="projects" class="section container">
+      <div class="section-head">
+        <h2>Portfolio</h2>
+        <div>
+          <button id="newProjectBtn" class="btn small">Add Project</button>
+        </div>
+      </div>
+
+      <div id="projectGrid" class="grid projects"></div>
+
+      <div id="projectEditor" class="editor modal hidden">
+        <div class="modal-inner">
+          <h3 id="projectEditorTitle">New Project</h3>
+          <input id="projectTitle" placeholder="Project Title" />
+          <input id="projectLink" placeholder="Link (optional)" />
+          <textarea id="projectDesc" rows="6" placeholder="Description..."></textarea>
+          <label class="file">
+            <input id="projectImage" type="file" accept="image/*" />
+            <span>Upload image (recommended)</span>
+          </label>
+          <div class="editor-actions">
+            <button id="saveProject" class="btn primary">Save</button>
+            <button id="cancelProject" class="btn ghost">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section container contact-section">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p>Clients or collaborators can contact you here.</p>
+      </div>
+
+      <div class="contact-grid">
+        <form id="contactForm" class="card contact-card">
+          <input id="cname" placeholder="Your name" required />
+          <input id="cemail" placeholder="Email" type="email" required />
+          <input id="csubject" placeholder="Subject" />
+          <textarea id="cmessage" rows="6" placeholder="Message…" required></textarea>
+          <div class="row">
+            <input id="formspreeEndpoint" placeholder="Formspree endpoint (optional)" />
+            <small>Leave blank to save locally</small>
+          </div>
+          <div class="editor-actions">
+            <button type="submit" class="btn primary">Send Message</button>
+          </div>
+          <div id="contactStatus" class="small muted"></div>
+        </form>
+
+        <div class="card contact-info">
+          <h3>Contact Info</h3>
+          <p>Email: <a href="mailto:hello@business.hub">hello@business.hub</a></p>
+          <p>Phone: +1 555 123 456</p>
+          <div class="card small">
+            <h4>Saved messages</h4>
+            <ul id="savedMessages"></ul>
+          </div>
+          <div class="card small">
+            <h4>Export / Import DB</h4>
+            <button id="exportDb" class="btn small ghost">Export JSON</button>
+            <button id="importDb" class="btn small ghost">Import JSON</button>
+            <input id="dbImportFile" type="file" accept=".json" style="display:none" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN PANEL -->
+    <section id="admin" class="section container admin-section">
+      <div class="section-head">
+        <h2>Admin</h2>
+        <div>
+          <button id="logoutBtn" class="btn small ghost hidden">Logout</button>
+        </div>
+      </div>
+
+      <div id="adminCard" class="card">
+        <div id="loginBox">
+          <h3>Admin Login</h3>
+          <input id="adminEmail" placeholder="Email" />
+          <input id="adminPassword" placeholder="Password" type="password" />
+          <div class="row">
+            <button id="loginBtn" class="btn primary">Login</button>
+            <button id="setupBtn" class="btn ghost">Create Admin</button>
+          </div>
+          <div class="small muted">Admin is stored locally (client-side). For production use a secure backend.</div>
+        </div>
+
+        <div id="adminPanel" class="hidden">
+          <h3>Admin Panel</h3>
+          <div class="admin-actions">
+            <button id="manageThoughts" class="btn small">Manage Thoughts</button>
+            <button id="manageWork" class="btn small">Manage Work</button>
+            <button id="manageProjects" class="btn small">Manage Projects</button>
+            <button id="clearData" class="btn small ghost">Clear All Data</button>
+            <button id="downloadDbBtn" class="btn small">Download DB</button>
+          </div>
+          <div id="adminArea"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="deploy" class="section container">
+      <h2>Deploy</h2>
+      <div class="card">
+        <h3>Host for free (GitHub Pages)</h3>
+        <ol>
+          <li>Create a new GitHub repo and push these files to `main` branch.</li>
+          <li>Go to Settings → Pages → select `main` / `root` and save.</li>
+          <li>Your site will be available at <code>https://your-username.github.io/your-repo/</code>.</li>
+        </ol>
+        <p>Want me to prepare a `deploy.sh` or push to your GitHub? I can help (requires repo access).</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div>© <span id="year"></span> Business Hub — Built with 🔨🤖🔧</div>
+  </footer>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
